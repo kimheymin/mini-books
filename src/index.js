@@ -6,6 +6,7 @@ import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import Error from './pages/Error';
 import BookList from './pages/BookList';
 import MyBook from './pages/MyBook';
+import BookDetailModal from './component/BookDetailModal';
 
 const router = createBrowserRouter([
   {
@@ -13,15 +14,15 @@ const router = createBrowserRouter([
     element : <App />,
     errorElement : <Error />,
     children : [
-      {index : true, element : <BookList />},
-      {path : '/book/:id', element : <BookList />},
+      {path : '/book/:keyword', element : <BookList />},
+      // {path : '/book/detail/id', element : <BookDetailModal />},
       {path : '/book/like', element : <MyBook />},
     ]
   }
 ])
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
+  <>
     <RouterProvider router={router} />
-  </React.StrictMode>
+  </>
 )
