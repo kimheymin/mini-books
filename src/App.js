@@ -1,16 +1,19 @@
-import { Outlet } from 'react-router';
-import './App.css';
-import SearchHeader from './component/SearchHeader';
-import { QueryClient, QueryClientProvider } from 'react-query';
+import { Outlet } from "react-router";
+import "./App.css";
+import SearchHeader from "./component/SearchHeader";
+import { QueryClient, QueryClientProvider } from "react-query";
+import { DarkModeContextProvider } from "./context/DarkModeContext";
 
 const queryClient = new QueryClient();
 function App() {
   return (
     <>
-    <SearchHeader />
-    <QueryClientProvider client={queryClient}>
-    <Outlet />
-    </QueryClientProvider>
+      <DarkModeContextProvider>
+        <SearchHeader />
+        <QueryClientProvider client={queryClient}>
+          <Outlet />
+        </QueryClientProvider>
+      </DarkModeContextProvider>
     </>
   );
 }
