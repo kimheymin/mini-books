@@ -17,8 +17,8 @@ export default function Book({ book }) {
   return (
     <>
       {like && <ToastMsg setLike={setLike} text="내 서재에 추가되었습니다." />}
-      <li className="m-4 p-4 rounded-md shadow-2xl hover:scale-105">
-        <img className="p-0" src={image} alt={isbn} />
+      <li className="w-60 m-auto md:m-4 p-4 rounded-md shadow-2xl hover:scale-105 ">
+        <img className="m-auto p-0" src={image} alt={isbn} />
         <p className="py-2">
           {title.length < 35 ? title : title.slice(0, 30) + "..."}
         </p>

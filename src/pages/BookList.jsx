@@ -36,7 +36,7 @@ export default function BookList() {
       <div className="flex justify-between px-4">
         <div className="flex">
           {searchOptions.map((item, index) => (
-            <div className="pr-8 text-lg">
+            <div className="p-0 text-lg md:pr-8">
               <label key={index} onChange={handleSearchfilterChange}>
                 <input
                   className="m-2"
@@ -80,7 +80,7 @@ export default function BookList() {
       {isLoading && <p>isLoading...</p>}
       {error && <p>error...</p>}
       {data && (
-        <ul className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-5 gap-4 gap-y-4">
+        <ul className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-5 gap-4 gap-y-4 ">
           {data.slice(offset, offset + limit).map((item, index) => (
             <Book key={index} book={item} />
           ))}
