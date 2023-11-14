@@ -4,6 +4,7 @@ import { useQuery } from "react-query";
 import { useParams } from "react-router";
 import Book from "../component/Book";
 import Pagination from "../component/Pagination";
+import { getData } from "../api/getBookData";
 
 export default function BookList() {
   const showOptions = [
@@ -29,36 +30,39 @@ export default function BookList() {
 
   const { isLoading, error, data } = useQuery(
     [keyword, searhOption],
-    async () => {
-      return await axios.get("/datas/data.json").then((res) => {
-        res.data.items.map((item) => {
-          item.author = item.author.replaceAll("^", " ");
-          item.publisher = item.publisher.replaceAll("^", " ");
-        });
-        return res.data.items;
-      });
+    () => getData(keyword, searchOptions)
+    // async () => {
+    //   return await axios.get("/datas/data.json").then((res) => {
+    //     res.data.items.map((item) => {
+    //       item.author = item.author.replaceAll("^", " ");
+    //       item.publisher = item.publisher.replaceAll("^", " ");
+    //       item.likeState = false;
+    //     });
 
-      // return await axios({
-      //   method: "get",
-      //   baseURL: "/v1/search/book.json",
-      //   params: {
-      //     query: keyword,
-      //     display: 100,
-      //     start: 1,
-      //     sort: searhOption,
-      //   },
-      //   headers: {
-      //     "X-Naver-Client-Id": `${process.env.REACT_APP_NAVER_API_KEY}`,
-      //     "X-Naver-Client-Secret": `${process.env.REACT_APP_NAVER_API_SECRET}`,
-      //   },
-      // }).then((res) => {
-      //   res.data.items.map((item) => {
-      //     item.author = item.author.replaceAll("^", " ");
-      //     item.publisher = item.publisher.replaceAll("^", " ");
-      //   });
-      //   return res.data.items;
-      // });
-    }
+    //     return res.data.items;
+    //   });
+
+    // return await axios({
+    //   method: "get",
+    //   baseURL: "/v1/search/book.json",
+    //   params: {
+    //     query: keyword,
+    //     display: 100,
+    //     start: 1,
+    //     sort: searhOption,
+    //   },
+    //   headers: {
+    //     "X-Naver-Client-Id": `${process.env.REACT_APP_NAVER_API_KEY}`,
+    //     "X-Naver-Client-Secret": `${process.env.REACT_APP_NAVER_API_SECRET}`,
+    //   },
+    // }).then((res) => {
+    //   res.data.items.map((item) => {
+    //     item.author = item.author.replaceAll("^", " ");
+    //     item.publisher = item.publisher.replaceAll("^", " ");
+    //   });
+    //   return res.data.items;
+    // });
+    // }
   );
 
   return (
