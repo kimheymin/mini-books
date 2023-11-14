@@ -1,9 +1,9 @@
 import axios from "axios";
-import { async } from "q";
 import React, { useState } from "react";
 import { useQuery } from "react-query";
 import { useParams } from "react-router";
 import Book from "../component/Book";
+import Pagination from "../component/Pagination";
 
 export default function BookList() {
   const showOptions = [
@@ -19,10 +19,13 @@ export default function BookList() {
 
   const { keyword } = useParams();
   const [searhOption, setSearhOption] = useState("sim");
-  const [showOption, setShowOption] = useState("");
+
+  const [limit, setLimit] = useState(10);
+  const [page, setPage] = useState(1);
+  const offset = (page - 1) * limit;
 
   const handleSearchfilterChange = (e) => setSearhOption(e.target.id);
-  const handleShowCountChange = (e) => console.log(e.target.value);
+  const handleShowCountChange = (e) => setLimit(Number(e.target.value));
 
   const { isLoading, error, data } = useQuery(
     [keyword, searhOption],
@@ -109,11 +112,24 @@ export default function BookList() {
       {isLoading && <p>isLoading...</p>}
       {error && <p>error...</p>}
       {data && (
-        <ul className="grid grid-cols-5">
-          {data.map((item, index) => (
+        <ul className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-5 gap-4 gap-y-4">
+          {/* {data.map((item, index) => (
+            <Book key={index} book={item} />
+          ))} */}
+
+          {data.slice(offset, offset + limit).map((item, index) => (
             <Book key={index} book={item} />
           ))}
         </ul>
+      )}
+
+      {data && (
+        <Pagination
+          total={data.length}
+          limit={limit}
+          page={page}
+          setPage={setPage}
+        />
       )}
     </section>
   );
