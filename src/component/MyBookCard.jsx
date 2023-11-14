@@ -13,33 +13,37 @@ export default function MyBookCard({ bookInfo }) {
   const currentTime = today.toLocaleDateString();
 
   const [text, setText] = useState(review);
-
   const handleTextChange = (e) => setText(e.target.value);
-  const handleSave = () => {
+
+  const handleSave = (e) => {
     const reviewBook = { ...bookInfo, review: text };
     addMyBook(isbn, reviewBook);
   };
+
   const handleShowCountChange = (e) => {
     const reviewBook = { ...bookInfo, status: e.target.value };
     addMyBook(isbn, reviewBook);
   };
-  const handleDelete = () => removeMyBook(isbn);
+
+  const handleDelete = (isbn) => removeMyBook(isbn);
 
   return (
-    <li className="flex justify-center m-auto my-8 items-center">
-      <img src={image} alt={title} className="w-40 h-40" />
-      <div className="block w-3/12">
-        <p className="pb-8">{title}</p>
-        <input
-          className="w-full h-12 px-2"
-          value={text}
-          onChange={handleTextChange}
-          type="text"
-          placeholder="한줄평 입력"
-        />
+    <li className="md:flex items-center justify-center my-8">
+      <div className="flex md:w-1/3 items-center">
+        <img src={image} alt={title} className="w-40 h-40 md:w-56 md:h-44" />
+        <div className="w-4/6 md:w-full">
+          <p className="pb-6 text-lg">{title}</p>
+          <p className="text-right text-sm mx-6">{currentTime}</p>
+          <input
+            className="w-11/12 h-12 px-4 my-5"
+            value={text}
+            onChange={handleTextChange}
+            type="text"
+            placeholder="한줄평 입력"
+          />
+        </div>
       </div>
-      <p className="text-right text-sm mx-8">{currentTime}</p>
-      <div className="mx-4">
+      <div className="mx-4 text-right mb-4">
         <select
           className="w-24 h-10 p-2 rounded-md"
           onChange={handleShowCountChange}
@@ -50,7 +54,6 @@ export default function MyBookCard({ bookInfo }) {
             </option>
           ))}
         </select>
-
         <button
           onClick={handleSave}
           className="w-16 h-10 p-2 rounded-md bg-blue-400 mx-6 hover:bg-blue-600"
@@ -58,7 +61,7 @@ export default function MyBookCard({ bookInfo }) {
           저장
         </button>
         <button
-          onClick={handleDelete}
+          onClick={() => handleDelete(isbn)}
           className="w-16 h-10 p-2 rounded-md bg-red-500"
         >
           삭제
