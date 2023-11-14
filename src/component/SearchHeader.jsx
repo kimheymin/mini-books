@@ -23,27 +23,27 @@ export default function SearchHeader() {
   useEffect(() => setText(keyword || ""), [keyword]);
 
   return (
-    <header className="flex w-full items-center p-3 border-b border-zinc-200 dark:border-zinc-600">
-      <Link to="/" className="w-60 text-2xl px-8">
-        미니북스
-      </Link>
-
-      <form className="w-full relative" onSubmit={handleSubmit}>
-        <label htmlFor="text">
-          <input
-            className="pl-10 w-2/5 h-12 rounded-2xl text-lg font-bold"
-            type="text"
-            value={text}
-            onChange={handleChange}
-          />
-        </label>
-        <button className="absolute top-4 left-2 ">
-          <FaSearch />
-        </button>
-      </form>
-
-      <div className="flex justify-between w-44 pr-8">
-        <Link className="hover:text-orange-400" to="/book/like">
+    <header className="flex md:justify-between items-center border-b border-zinc-200 dark:border-zinc-600">
+      <div className="flex items-center">
+        <Link to="/" className="text-2xl p-4 m-2">
+          미니북스
+        </Link>
+        <form className="relative p-2" onSubmit={handleSubmit}>
+          <label htmlFor="text">
+            <input
+              className="pl-10 h-12 rounded-2xl text-lg font-bold md:w-96"
+              type="text"
+              value={text}
+              onChange={handleChange}
+            />
+          </label>
+          <button className="absolute top-6 left-5 ">
+            <FaSearch />
+          </button>
+        </form>
+      </div>
+      <div className="text-right m-2 md:flex items-center w-32">
+        <Link className="mr-4 hover:text-orange-400" to="/book/like">
           내 서재
         </Link>
         <button

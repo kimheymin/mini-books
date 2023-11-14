@@ -1,4 +1,3 @@
-import axios from "axios";
 import React, { useState } from "react";
 import { useQuery } from "react-query";
 import { useParams } from "react-router";
@@ -14,8 +13,8 @@ export default function BookList() {
   ];
 
   const searchOptions = [
-    { id: "date", name: "option", text: "출간일순" },
     { id: "sim", name: "option", text: "정확도순" },
+    { id: "date", name: "option", text: "출간일순" },
   ];
 
   const { keyword } = useParams();
@@ -28,41 +27,8 @@ export default function BookList() {
   const handleSearchfilterChange = (e) => setSearhOption(e.target.id);
   const handleShowCountChange = (e) => setLimit(Number(e.target.value));
 
-  const { isLoading, error, data } = useQuery(
-    [keyword, searhOption],
-    () => getData(keyword, searchOptions)
-    // async () => {
-    //   return await axios.get("/datas/data.json").then((res) => {
-    //     res.data.items.map((item) => {
-    //       item.author = item.author.replaceAll("^", " ");
-    //       item.publisher = item.publisher.replaceAll("^", " ");
-    //       item.likeState = false;
-    //     });
-
-    //     return res.data.items;
-    //   });
-
-    // return await axios({
-    //   method: "get",
-    //   baseURL: "/v1/search/book.json",
-    //   params: {
-    //     query: keyword,
-    //     display: 100,
-    //     start: 1,
-    //     sort: searhOption,
-    //   },
-    //   headers: {
-    //     "X-Naver-Client-Id": `${process.env.REACT_APP_NAVER_API_KEY}`,
-    //     "X-Naver-Client-Secret": `${process.env.REACT_APP_NAVER_API_SECRET}`,
-    //   },
-    // }).then((res) => {
-    //   res.data.items.map((item) => {
-    //     item.author = item.author.replaceAll("^", " ");
-    //     item.publisher = item.publisher.replaceAll("^", " ");
-    //   });
-    //   return res.data.items;
-    // });
-    // }
+  const { isLoading, error, data } = useQuery([keyword, searhOption], () =>
+    getData(keyword, searchOptions)
   );
 
   return (
@@ -101,7 +67,6 @@ export default function BookList() {
           </select>
         </div>
       </div>
-
       {data && (
         <div className="flex items-center text-2xl pt-8">
           <span className="font-semibold m-2 text-red-400">'{keyword}'</span> 에
@@ -112,21 +77,15 @@ export default function BookList() {
           개의 검색결과
         </div>
       )}
-
       {isLoading && <p>isLoading...</p>}
       {error && <p>error...</p>}
       {data && (
         <ul className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-5 gap-4 gap-y-4">
-          {/* {data.map((item, index) => (
-            <Book key={index} book={item} />
-          ))} */}
-
           {data.slice(offset, offset + limit).map((item, index) => (
             <Book key={index} book={item} />
           ))}
         </ul>
       )}
-
       {data && (
         <Pagination
           total={data.length}

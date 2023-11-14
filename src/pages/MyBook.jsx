@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { getData } from "../api/getBookData";
-import { useQuery } from "react-query";
 import { getMyBook } from "../api/firebase";
 import MyBookCard from "../component/MyBookCard";
 
@@ -21,8 +19,8 @@ export default function MyBook() {
     mydata && mydata.filter((item) => item.status === "completed").length;
 
   return (
-    <section className="pt-8">
-      <div className="flex w-1/4 p-4 m-auto text-center justify-around">
+    <section className="pt-8 sm:w-full">
+      <div className="flex w-96 p-4 m-auto text-center justify-around  ">
         <li>
           <p>전체</p>
           <span className="text-xl font-semibold">{allCnt}</span>
@@ -36,7 +34,6 @@ export default function MyBook() {
           <span className="text-xl font-semibold">{completedCnt}</span>
         </li>
       </div>
-
       {mydata && (
         <ul className="">
           {mydata.map((item, index) => (
