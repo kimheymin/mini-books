@@ -23,7 +23,7 @@ export default function SearchHeader() {
   useEffect(() => setText(keyword || ""), [keyword]);
 
   return (
-    <header className="flex w-full items-center p-3 border-b border-zinc-700">
+    <header className="flex w-full items-center p-3 border-b border-zinc-200 dark:border-zinc-600">
       <Link to="/" className="w-60 text-2xl px-8">
         미니북스
       </Link>
@@ -42,9 +42,14 @@ export default function SearchHeader() {
         </button>
       </form>
 
-      <div className="flex justify-between w-44">
-        <Link to="/book/like">내 서재</Link>
-        <button onClick={handleDarkMode} className="pr-8 text-lg">
+      <div className="flex justify-between w-44 pr-8">
+        <Link className="hover:text-orange-400" to="/book/like">
+          내 서재
+        </Link>
+        <button
+          onClick={handleDarkMode}
+          className="text-lg dark:bg-orange-500 bg-orange-200 rounded-xl p-1 hover:scale-110 "
+        >
           {!darkMode && <BiSolidMoon />}
           {darkMode && <BiSolidSun style={{ color: "white" }} />}
         </button>

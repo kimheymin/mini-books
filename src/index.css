@@ -12,7 +12,7 @@
 
 @layer base {
   button[aria-current="page"] {
-    @apply bg-teal-600;
+    @apply bg-orange-300;
   }
 }
 
