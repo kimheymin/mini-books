@@ -1,9 +1,11 @@
 import axios from "axios";
 
 export async function getData(keyword, searhOption) {
+  const PROXY = window.location.hostname === "localhost" ? "" : "/proxy";
+
   return await axios({
     method: "get",
-    baseURL: "/v1/search/book.json",
+    baseURL: `${PROXY}/v1/search/book.json`,
     params: {
       query: keyword,
       display: 100,
