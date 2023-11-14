@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { addMyBook, removeMyBook } from "../api/firebase";
 
 export default function MyBookCard({ bookInfo }) {
-  const { title, isbn, image, review } = bookInfo;
+  const { title, isbn, image, review, status } = bookInfo;
 
   const showOptions = [
     { value: "active", name: "읽는 중" },
@@ -19,9 +19,11 @@ export default function MyBookCard({ bookInfo }) {
     const reviewBook = { ...bookInfo, review: text };
     addMyBook(isbn, reviewBook);
   };
+  const handleShowCountChange = (e) => {
+    const reviewBook = { ...bookInfo, status: e.target.value };
+    addMyBook(isbn, reviewBook);
+  };
   const handleDelete = () => removeMyBook(isbn);
-
-  const handleShowCountChange = () => {};
 
   return (
     <li className="flex justify-center m-auto my-8 items-center">
@@ -43,15 +45,12 @@ export default function MyBookCard({ bookInfo }) {
           onChange={handleShowCountChange}
         >
           {showOptions.map((item, index) => (
-            <option
-              key={index}
-              value={item.value}
-              defaultValue={item.value === "active"}
-            >
+            <option key={index} value={item.value}>
               {item.name}
             </option>
           ))}
         </select>
+
         <button
           onClick={handleSave}
           className="w-16 h-10 p-2 rounded-md bg-blue-400 mx-6 hover:bg-blue-600"
