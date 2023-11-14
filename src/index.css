@@ -10,6 +10,12 @@
   font-style: normal;
 }
 
+@layer base {
+  button[aria-current="page"] {
+    @apply bg-teal-600;
+  }
+}
+
 html {
   --color-bg-dark: white;
   --color-input: whitesmoke;
@@ -50,6 +56,7 @@ li {
 button {
   border: none;
   background-color: transparent;
+  color: var(--color-text);
 }
 
 img {
