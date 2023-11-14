@@ -9,7 +9,7 @@ export default function Book({ book }) {
   const handleClick = () => {
     setLike(!like);
 
-    const bookData = { title, isbn, image };
+    const bookData = { title, isbn, image, review: "" };
     addMyBook(isbn, bookData);
   };
 

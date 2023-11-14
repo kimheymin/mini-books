@@ -1,19 +1,27 @@
 import React, { useState } from "react";
-import { removeMyBook } from "../api/firebase";
+import { addMyBook, removeMyBook } from "../api/firebase";
 
-export default function MyBookCard({ bookInfo: { title, isbn, image } }) {
+export default function MyBookCard({ bookInfo }) {
+  const { title, isbn, image, review } = bookInfo;
+
   const showOptions = [
     { value: "active", name: "읽는 중" },
     { value: "completed", name: "읽음" },
   ];
 
-  const [text, setText] = useState("");
   const today = new Date();
   const currentTime = today.toLocaleDateString();
 
+  const [text, setText] = useState(review);
+
   const handleTextChange = (e) => setText(e.target.value);
-  const handleShowCountChange = () => {};
+  const handleSave = () => {
+    const reviewBook = { ...bookInfo, review: text };
+    addMyBook(isbn, reviewBook);
+  };
   const handleDelete = () => removeMyBook(isbn);
+
+  const handleShowCountChange = () => {};
 
   return (
     <li className="flex justify-center m-auto my-8 items-center">
@@ -45,8 +53,14 @@ export default function MyBookCard({ bookInfo: { title, isbn, image } }) {
           ))}
         </select>
         <button
+          onClick={handleSave}
+          className="w-16 h-10 p-2 rounded-md bg-blue-400 mx-6 hover:bg-blue-600"
+        >
+          저장
+        </button>
+        <button
           onClick={handleDelete}
-          className="w-16 h-10 p-2 rounded-md bg-orange-500 mx-6"
+          className="w-16 h-10 p-2 rounded-md bg-red-500"
         >
           삭제
         </button>
