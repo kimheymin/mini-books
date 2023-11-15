@@ -2,7 +2,7 @@
 
 네이버에서 제공하는 책 검색 API를 활용하여 만든 책 검색 사이트입니다. 사용자는 원하는 책을 검색할 수 있으며, 특정 책에 대한 짤막한 기록을 남길 수 있습니다.
 
-### minibooks.netlify.app
+### https://minibooks.netlify.app
 
 <br />
 
@@ -23,8 +23,10 @@
 
 ### 화면
 1. 검색어 입력 후 화면
-![image](https://github.com/kimheymin/mini-books/assets/80433501/2838227b-81a4-41d8-b230-2a50dca81647)
+![image](https://github.com/kimheymin/mini-books/assets/80433501/2b8d1a71-de46-41aa-b778-adab17236f69)
+
 
 2. 내 서재 화면
-![image](https://github.com/kimheymin/mini-books/assets/80433501/4b95a704-da39-42ef-af49-3b373ed8249f)
+![image](https://github.com/kimheymin/mini-books/assets/80433501/61ab8513-8804-41ac-86da-a69fe362dbdb)
+
 
