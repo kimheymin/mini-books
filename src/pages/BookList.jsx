@@ -5,29 +5,29 @@ import Book from "../component/Book";
 import Pagination from "../component/Pagination";
 import { getData } from "../api/getBookData";
 
+const showOptions = [
+  { value: "10", name: "10개씩 보기" },
+  { value: "30", name: "30개씩 보기" },
+  { value: "50", name: "50개씩 보기" },
+];
+
+const searchOptions = [
+  { id: "sim", name: "option", text: "정확도순" },
+  { id: "date", name: "option", text: "출간일순" },
+];
+
 export default function BookList() {
-  const showOptions = [
-    { value: "10", name: "10개씩 보기" },
-    { value: "30", name: "30개씩 보기" },
-    { value: "50", name: "50개씩 보기" },
-  ];
-
-  const searchOptions = [
-    { id: "sim", name: "option", text: "정확도순" },
-    { id: "date", name: "option", text: "출간일순" },
-  ];
-
   const { keyword } = useParams();
-  const [searhOption, setSearhOption] = useState("sim");
+  const [searchOption, setSearchOption] = useState("sim");
 
   const [limit, setLimit] = useState(10);
   const [page, setPage] = useState(1);
   const offset = (page - 1) * limit;
 
-  const handleSearchfilterChange = (e) => setSearhOption(e.target.id);
+  const handleSearchFilterChange = (e) => setSearchOption(e.target.id);
   const handleShowCountChange = (e) => setLimit(Number(e.target.value));
 
-  const { isLoading, error, data } = useQuery([keyword, searhOption], () =>
+  const { isLoading, error, data } = useQuery([keyword, searchOption], () =>
     getData(keyword, searchOptions)
   );
 
@@ -37,7 +37,7 @@ export default function BookList() {
         <div className="flex">
           {searchOptions.map((item, index) => (
             <div className="p-0 text-lg md:pr-8">
-              <label key={index} onChange={handleSearchfilterChange}>
+              <label key={index} onChange={handleSearchFilterChange}>
                 <input
                   className="m-2"
                   type="radio"
@@ -50,7 +50,7 @@ export default function BookList() {
             </div>
           ))}
         </div>
-        <div className="">
+        <div>
           <select
             className="w-32 h-10 p-2 rounded-md"
             onChange={handleShowCountChange}
@@ -71,16 +71,14 @@ export default function BookList() {
         <div className="flex items-center text-2xl pt-8">
           <span className="font-semibold m-2 text-red-400">'{keyword}'</span> 에
           대한
-          <span className="font-semibold m-2 text-red-400">
-            {data.length}
-          </span>{" "}
+          <span className="font-semibold m-2 text-red-400">{data.length}</span>
           개의 검색결과
         </div>
       )}
       {isLoading && <p>isLoading...</p>}
       {error && <p>error...</p>}
       {data && (
-        <ul className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-5 gap-4 gap-y-4 ">
+        <ul className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-5 gap-4 gap-y-4">
           {data.slice(offset, offset + limit).map((item, index) => (
             <Book key={index} book={item} />
           ))}
