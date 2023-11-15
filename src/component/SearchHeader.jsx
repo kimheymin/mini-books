@@ -3,7 +3,6 @@ import { useNavigate, useParams } from "react-router";
 import { Link } from "react-router-dom";
 import { BiSolidSun, BiSolidMoon } from "react-icons/bi";
 import { FaSearch } from "react-icons/fa";
-import { CiDark } from "react-icons/ci";
 import { DarkModeContext } from "../context/DarkModeContext";
 
 export default function SearchHeader() {
@@ -12,7 +11,6 @@ export default function SearchHeader() {
   const [text, setText] = useState("");
 
   const { darkMode, toggleDarkMode } = useContext(DarkModeContext);
-  const handleDarkMode = () => toggleDarkMode();
 
   const handleChange = (e) => setText(e.target.value);
   const handleSubmit = (e) => {
@@ -47,11 +45,14 @@ export default function SearchHeader() {
           내 서재
         </Link>
         <button
-          onClick={handleDarkMode}
+          onClick={toggleDarkMode}
           className="mr-4 text-lg dark:bg-orange-500 bg-orange-200 rounded-xl p-1 hover:scale-110 "
         >
-          {!darkMode && <BiSolidMoon />}
-          {darkMode && <BiSolidSun style={{ color: "white" }} />}
+          {darkMode ? (
+            <BiSolidSun style={{ color: "white" }} />
+          ) : (
+            <BiSolidMoon />
+          )}
         </button>
       </div>
     </header>

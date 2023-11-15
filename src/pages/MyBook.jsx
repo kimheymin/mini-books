@@ -3,40 +3,37 @@ import { getMyBook } from "../api/firebase";
 import MyBookCard from "../component/MyBookCard";
 
 export default function MyBook() {
-  const [mydata, setMydata] = useState();
+  const [myData, setMyData] = useState([]);
 
   useEffect(() => {
     (async () => {
       const data = await getMyBook();
-      setMydata(data);
+      setMyData(data);
     })();
-  }, [mydata]);
+  }, [myData]);
 
-  const allCnt = mydata && mydata.length;
-  const activeCnt =
-    mydata && mydata.filter((item) => item.status === "active").length;
-  const completedCnt =
-    mydata && mydata.filter((item) => item.status === "completed").length;
+  const readCnt = (status) =>
+    myData.filter((item) => item.status === status).length;
 
   return (
     <section className="pt-8 sm:w-full">
       <div className="flex w-96 p-4 m-auto text-center justify-around  ">
         <li>
           <p>전체</p>
-          <span className="text-xl font-semibold">{allCnt}</span>
+          <span className="text-xl font-semibold">{myData.length}</span>
         </li>
         <li>
           <p>읽는 중</p>
-          <span className="text-xl font-semibold">{activeCnt}</span>
+          <span className="text-xl font-semibold">{readCnt("active")}</span>
         </li>
         <li>
           <p>읽음</p>
-          <span className="text-xl font-semibold">{completedCnt}</span>
+          <span className="text-xl font-semibold">{readCnt("completed")}</span>
         </li>
       </div>
-      {mydata && (
-        <ul className="">
-          {mydata.map((item, index) => (
+      {myData && (
+        <ul>
+          {myData.map((item, index) => (
             <MyBookCard key={index} bookInfo={item} />
           ))}
         </ul>

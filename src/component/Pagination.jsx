@@ -3,9 +3,9 @@ import React from "react";
 export default function Pagination({ total, limit, page, setPage }) {
   const numPages = Math.ceil(total / limit);
 
-  const handleClick = () => setPage(page - 1);
-  const handleNumClick = (i) => setPage(i + 1);
-  const handleUpClick = () => setPage(page + 1);
+  const handlePrevClick = () => setPage(page - 1);
+  const handleNextClick = () => setPage(page + 1);
+
   return (
     <nav className="text-center text-lg my-3 font-semibold">
       <button
@@ -14,7 +14,7 @@ export default function Pagination({ total, limit, page, setPage }) {
             ? "hover:text-gray-500"
             : "hover:text-red-500 cursor-pointer"
         }`}
-        onClick={handleClick}
+        onClick={handlePrevClick}
         disabled={page === 1}
       >
         &lt;
@@ -27,7 +27,7 @@ export default function Pagination({ total, limit, page, setPage }) {
               "m-3 bg-zinc-200 px-1.5 rounded-full hover:bg-zinc-500 dark:text-black"
             }
             key={i + 1}
-            onClick={() => handleNumClick(i)}
+            onClick={() => setPage(i + 1)}
             aria-current={page === 1 + i ? "page" : undefined}
           >
             {i + 1}
@@ -39,7 +39,7 @@ export default function Pagination({ total, limit, page, setPage }) {
             ? "hover:text-gray-500"
             : "hover:text-green-500 cursor-pointer"
         }`}
-        onClick={handleUpClick}
+        onClick={handleNextClick}
         disabled={page === numPages}
       >
         &gt;

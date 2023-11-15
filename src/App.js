@@ -1,5 +1,4 @@
 import { Outlet } from "react-router";
-import "./App.css";
 import SearchHeader from "./component/SearchHeader";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { DarkModeContextProvider } from "./context/DarkModeContext";
