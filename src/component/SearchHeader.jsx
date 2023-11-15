@@ -29,9 +29,10 @@ export default function SearchHeader() {
         <form className="relative p-2" onSubmit={handleSubmit}>
           <label htmlFor="text">
             <input
-              className="pl-10 h-12 rounded-2xl text-lg font-bold w-full md:w-96"
+              className="pl-10 h-12 rounded-2xl text-md font-bold w-full md:w-96"
               type="text"
               value={text}
+              placeholder="책 이름, 출판사, 저자, 키워드로 검색해보세요."
               onChange={handleChange}
             />
           </label>
