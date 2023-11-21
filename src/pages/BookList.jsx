@@ -28,7 +28,7 @@ export default function BookList() {
   const handleShowCountChange = (e) => setLimit(Number(e.target.value));
 
   const { isLoading, error, data } = useQuery([keyword, searchOption], () =>
-    getData(keyword, searchOptions)
+    getData(keyword, searchOption)
   );
 
   return (

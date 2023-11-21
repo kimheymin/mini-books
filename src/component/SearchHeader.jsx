@@ -15,7 +15,10 @@ export default function SearchHeader() {
   const handleChange = (e) => setText(e.target.value);
   const handleSubmit = (e) => {
     e.preventDefault();
-    navigate(`/book/${text}`);
+    if (text.length === 0) {
+      return;
+    }
+    return navigate(`/book/${text}`);
   };
 
   useEffect(() => setText(keyword || ""), [keyword]);
