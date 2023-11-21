@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import { addMyBook } from "../api/firebase";
 import ToastMsg from "./ToastMsg";
@@ -17,9 +17,7 @@ export default function Book({ book }) {
 
   return (
     <>
-      {like && (
-        <ToastMsg toastMsgState={setLike} text="내 서재에 추가되었습니다." />
-      )}
+      <ToastMsg toastMsgState={like} text="내 서재에 추가되었습니다." />
       <li className="w-60 m-auto md:m-4 p-4 rounded-md shadow-2xl hover:scale-105">
         <img className="m-auto p-0" src={image} alt={isbn} />
         <p className="py-2">
